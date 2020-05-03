@@ -1,0 +1,64 @@
+#====================
+
+# PC03 - Spirograph Generative Art
+
+# James Hartwig
+
+# 2/7/2020
+
+#
+
+# Randomly Generates Spiral Graphics Using Turtles
+#numpy help was recieved from lecture notes on 2/6/2020
+
+#====================
+
+from turtle import *
+import numpy as np # maths library
+from random import *
+
+honcho=Turtle(visible=False) # makes it invisible
+poncho = Turtle(visible=False)
+tonto=Screen()
+tonto.clear()
+tonto.bgcolor("black")
+honcho.width(3)
+honcho.color("cyan")
+honcho.speed("fastest")
+poncho.width(3)
+poncho.color("pink")
+poncho.speed("fastest")
+
+# mathematical equation parts
+R = 125
+r = 85
+d = 125 #distance from center circle
+circNum = 16
+steps = 1000
+stops = 1000
+theta = np.linspace(0,circNum *2*np.pi, steps) #works like range but with floats
+off_x =randint(-50,50)
+off_y = randint(-50,50)
+on_x = randint(-50,50)
+on_y = randint(-50,50)
+
+#begin to setup turtle
+honcho.penup()
+x_0 = (R-r)*np.cos(theta[0])+d*np.cos(((R-r)/r)*theta[0])
+y_0 = (R-r)*np.sin(theta[0])-d*np.sin(((R-r)/r)*theta[0])
+honcho.goto(x_0+off_x,y_0+off_y)
+honcho.pendown()
+poncho.penup()
+poncho.goto(x_0+off_x,y_0+off_y)
+poncho.pendown()
+
+#draw
+for t in range(steps): # spirographing
+    x = (R-r)*np.cos(theta[t])+d*np.cos(((R-r)/r)*theta[t])
+    y = (R-r)*np.sin(theta[t])-d*np.sin(((R-r)/r)*theta[t])
+    honcho.goto(x+off_x,y+off_y)
+    
+for i in range(stops): # spirographing second turtle
+    x = (R-r)*np.cos(theta[i])+d*np.cos(((R-r)/r)*theta[i])
+    y = (R-r)*np.sin(theta[i])-d*np.sin(((R-r)/r)*theta[i])
+    poncho.goto(x+on_x,y+on_y)
