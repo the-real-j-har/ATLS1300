@@ -1,0 +1,51 @@
+#==============
+#PC01-turtlePower
+#James Hartwig, Todd Holce
+#1/31/20
+#Turtle Drawing Code 
+#go through code and comment out the movements
+#comment out the colors on those objects
+#use an object fill command using begin_fill()
+#make bottom right circle heavier color to give impression of an abstract bird
+#turn in the very nice document
+#==============
+
+from turtle import *
+#importing turtle toolkit
+honcho = Turtle()
+#giving turtle a name
+screen = Screen()
+screen.bgpic('turtle.gif')
+#setting a background screen
+honcho.shape("circle")
+honcho.color("#246070")
+honcho.pensize(width=20)
+honcho.circle(300)
+honcho.penup()
+honcho.forward(200)
+honcho.left(90)
+honcho.forward(100)
+honcho.color('#E7F2F8')
+             #babyblue
+honcho.pendown()
+honcho.circle(300)
+honcho.penup()
+honcho.left(90)
+honcho.forward(300)
+honcho.left(90)
+honcho.forward(200)
+honcho.color('#E0D9D6')
+honcho.pendown()
+honcho.circle(300)
+honcho.left(90)
+honcho.color('#FFA384')
+honcho.circle(300)
+honcho.penup()
+honcho.forward(300)
+honcho.right(90)
+honcho.forward(100)
+honcho.pendown()
+honcho.color('#A2BACB')
+honcho.begin_fill()
+honcho.circle(50)
+honcho.end_fill()
