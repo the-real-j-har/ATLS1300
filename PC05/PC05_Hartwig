@@ -1,0 +1,110 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Mar  3 17:28:57 2020
+
+@author: hartw
+"""
+#====================
+
+# PC05 - Click Game
+
+# James Hartwig
+
+# 03/06/20
+
+#
+
+# Play the game of skill! Drag the bubbles into the bin!
+
+#====================
+#preflight checklist
+import pygame
+from random import *
+run=True
+drag=False
+
+#colors
+BLACK = (0,0,0)
+RED = (255,0,0)
+PINK = (170,0,50)
+GREEN = (0,255,0)
+BLUE = (0,0,255)
+LT_BLUE = (0, 100, 255)
+WHITE = (255,255,255)
+GRAY = (127,127,127)
+DK_GRAY = (100,100,100)
+
+#make background
+def backgroundMaker(size):
+    screen =pygame.display.set_mode((size,size))
+    pygame.Surface.fill(screen,DK_GRAY)
+    return screen
+    
+    
+screen = backgroundMaker(500)
+
+#create bubbles
+rects = []
+def rectMaker(amount):
+    for i in range(6):
+        rect = pygame.Rect(randint(0,450),randint(0,450),20,20)
+        rects.append(rect)
+
+rectMaker(6)    
+#fairly certain this is important do not know why or how  
+print(len(rects))
+
+#create goal box
+goalcolor = LT_BLUE
+goalRect = pygame.Rect(200,400,100,80)
+length = len(rects)
+
+#while run
+while run:
+    randoffset = randint(-1,1)
+
+    for event in pygame.event.get(): #check "instruments" 
+        
+        if event.type == pygame.QUIT:
+            run = False
+        
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            pos = pygame.mouse.get_pos() #get our x and y positions of where the click happened
+            for i in range(length):
+                if rects[i].collidepoint(pos[0],pos[1]):
+                    drag = True #clicky clicky draggy draggy
+                    selected = i
+                    print(selected)
+                    offsetX = rects[i].x - pos[0] #rectangle vs click position
+                    offsetY = rects[i].y - pos[1]
+            
+        elif event.type == pygame.MOUSEMOTION:
+            if drag:
+                pos = event.pos #update position
+                #update the position of the shape based on mouse motion event
+                rects[selected].x = pos[0] + offsetX
+                rects[selected].y = pos[1] + offsetY
+                
+            
+        elif event.type == pygame.MOUSEBUTTONUP: #detect release
+            #the goalRect list will check for collisions inside itself
+            if goalRect.collidelistall(rects): #from Dr. Z
+                hit = goalRect.collidelistall(rects)[0] #returns the index of the collided rect in the list
+                rects.pop(hit)
+                print("pop!")
+                length = length-1
+            drag = False #rect stays still now 
+    screen.fill(DK_GRAY)
+            
+    speed = [randint(-1,1),randint(-1,1)]
+    pygame.draw.rect(screen,goalcolor,(200,400,100,80))
+
+    for i in range(len(rects)):
+         pygame.draw.rect(screen,PINK,(rects[i].x+speed[0],rects[i].y+speed[1],20,20))
+             
+    
+    pygame.display.update() 
+    
+    
+
+
