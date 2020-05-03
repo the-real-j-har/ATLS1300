@@ -1,0 +1,99 @@
+# -*- coding: utf-8 -*-
+#====================
+
+# PC04 - ROBOT MOVIE
+
+# James Hartwig, I don't remember after this crazy week,...
+
+# 2/23/20
+
+#
+
+# Description - Creates wheatley from Portal and then interacts with key presses
+
+#====================
+
+#PSEUDOCODE
+#Modify example robot and make it perform the specified tasks
+#COMMENTS
+#Code modified from class example on 2/13/2020
+#help recieved from friend :) 
+
+
+import pygame
+from random import *
+
+#set up colors
+BLACK = (0,0,0)
+RED = (255,0,0)
+PINK = (170,0,50)
+GREEN = (0,255,0)
+BLUE = (0,0,255)
+LT_BLUE = (0, 100, 255)
+WHITE = (255,255,255)
+GRAY = (127,127,127)
+DK_GRAY = (100,100,100)
+
+#create screen and game variables
+size = 500
+screen = pygame.display.set_mode((size,size)) #create 500 x500 pixel screen
+
+run = True
+x = size/2 #center position for all robot parts
+y = size/2
+scale = 1 #variable to adjust when keys are pressed to change size of robot
+speed = 2
+eye_r = 2
+
+#Robo features
+blink = [GREEN, BLUE, RED, LT_BLUE]
+color = choice(blink) #assign a value to color
+colorL = choice(blink) #assign a value to color
+colorR = choice(blink) #assign a value to color
+
+#Game loop
+while run:
+    keys = pygame.key.get_pressed()
+    # create exit-on click detection:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            run = False
+            
+    #Drawing goes from bottom to top. We'll make our screen white first, then
+    #add the robo-parts.    
+    screen.fill(WHITE)
+    #Pygame draw docs: https://www.pygame.org/docs/ref/draw.html#pygame.draw.circle
+    #Head = pygame.draw.rect(screen,GRAY,(x-25,y,30,10)) 
+    Body = pygame.draw.circle(screen, GRAY, (int(x), int(y)),75)
+    L_eye = pygame.draw.circle(screen, GREEN, (int(x-10), int(y-70)),eye_r)
+    R_eye = pygame.draw.circle(screen, GREEN, (int(x+10), int(y-70)),eye_r)
+    panelLights1 = pygame.draw.circle(screen, colorR, (int(x+20), int(y-5)),3)
+    panelLights2 = pygame.draw.circle(screen, color, (int(x), int(y-5)),3)
+
+    #L_wheel = pygame.draw.circle(screen, BLACK, (int(x-40), int(y+63)),20)
+    R_wheel = pygame.draw.circle(screen, DK_GRAY, (int(x), int(y)),30)
+    #L_hub = pygame.draw.circle(screen, DK_GRAY, (int(x-40), int(y+63)),10)
+    R_hub = pygame.draw.circle(screen, BLUE, (int(x), int(y)),20)
+    eye_top = pygame.draw.rect(screen,DK_GRAY,(x-20,y-20,40,10))
+    eye_bottom = pygame.draw.rect(screen,DK_GRAY,(x-20,y+10,40,10))
+    
+    
+    if keys[pygame.K_SPACE]:
+        L_eye = pygame.draw.circle(screen, RED, (int(x-10), int(y-70)),eye_r)
+        R_eye = pygame.draw.circle(screen, RED, (int(x+10), int(y-70)),eye_r)
+        
+    if keys[pygame.K_UP]:
+        y = y-1
+        Body = pygame.draw.circle(screen, GRAY, (int(x), int(y)),75)
+        L_eye = pygame.draw.circle(screen, GREEN, (int(x-10), int(y-70)),eye_r)
+        R_eye = pygame.draw.circle(screen, GREEN, (int(x+10), int(y-70)),eye_r)
+        panelLights1 = pygame.draw.circle(screen, colorR, (int(x+20), int(y-5)),3)
+        panelLights2 = pygame.draw.circle(screen, color, (int(x), int(y-5)),3)
+    
+        R_wheel = pygame.draw.circle(screen, DK_GRAY, (int(x), int(y)),30)
+        R_hub = pygame.draw.circle(screen, BLUE, (int(x), int(y)),20)
+        eye_top = pygame.draw.rect(screen,DK_GRAY,(x-20,y-20,40,10))
+        eye_bottom = pygame.draw.rect(screen,DK_GRAY,(x-20,y+10,40,10))
+        
+    pygame.display.update() #update all changes to screen
