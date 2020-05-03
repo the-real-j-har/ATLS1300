@@ -1,0 +1,225 @@
+#Curves and Spirals
+#PC03-Generative Art
+#Cobi Chang
+#02/11/20
+#Starting with a curved Recaman Sequence and then adding pleasing and random spirographs to the screen.
+
+
+
+from turtle import *
+from random import *
+import numpy as np
+
+screensize(690,690)
+
+winnn = Screen()
+winnn.bgcolor('goldenrod')
+#turtle setup
+rec = Turtle()
+rec.width(2)
+rec.color("midnightblue")
+rec.hideturtle()
+rec.speed(0)
+rec.up()
+rec.forward(280)
+rec.down()
+
+listCircle = [0,1,3,6,2,7,13,20,12,21,11,22,10,23,9,24,8]
+listRight = [10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10]
+listBackward = [10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10]
+#drawing
+for i in range(len(listCircle)):
+    rec.circle(listCircle[i])
+    rec.right(listRight[i])
+    rec.backward(listBackward[i])
+                    #I removed the below section and turned it into the above forloop
+#rec.circle(0)
+#rec.right(10)
+#rec.backward(10)
+#rec.circle(1)
+#rec.right(10)
+#rec.backward(10)
+#rec.circle(3)
+#rec.right(10)
+#rec.backward(10)
+#rec.circle(6)
+#rec.right(10)
+#rec.backward(10)
+#rec.circle(2)
+#rec.right(10)
+#rec.backward(10)
+#rec.circle(7)
+#rec.right(10)
+#rec.backward(10)
+#rec.circle(13)
+#rec.right(10)
+#rec.backward(10)
+#rec.circle(20)
+#rec.right(10)
+#rec.backward(10)
+#rec.circle(12)
+#rec.right(10)
+#rec.backward(10)
+#rec.circle(21)
+#rec.right(10)
+#rec.backward(10)
+#rec.circle(11)
+#rec.right(10)
+#rec.backward(10)
+#rec.circle(22)
+#rec.right(10)
+#rec.backward(10)
+#rec.circle(10)
+#rec.right(10)
+#rec.backward(10)
+#rec.circle(23)
+#rec.right(10)
+#rec.backward(10)
+#rec.circle(9)
+#rec.right(10)
+#rec.backward(10)
+#rec.circle(24)
+#rec.right(10)
+#rec.backward(10)
+#rec.circle(8)
+
+
+spi = Turtle(visible=False)
+spi.width(3)
+spi.color('beige')
+spi.speed(0)
+
+R = 111
+r = 50
+d = 100
+
+circNum = 23
+steps = 1200
+theta = np.linspace(0,circNum*2*np.pi,steps)
+
+for loop in range(1):
+   
+    off_x = randint(-190,190)
+    off_y = randint(-190,190)
+
+    spi.up()
+    x = off_x + (R-r)*np.cos(theta[0]) + d*np.cos(((R-r)/r)*theta[0])
+    y = off_y + (R-r)*np.sin(theta[0]) + d*np.sin(((R-r)/r)*theta[0])
+    spi.goto(x,y)
+    spi.down()
+    
+    for t in range(len(theta)):
+        x = off_x + (R-r)*np.cos(theta[t]) + d*np.cos(((R-r)/r)*theta[t])
+        y = off_y + (R-r)*np.sin(theta[t]) + d*np.sin(((R-r)/r)*theta[t])
+        spi.goto(x,y)
+
+from turtle import *
+from random import *
+import numpy as np
+
+winnn = Screen()
+winnn.bgcolor('goldenrod')
+
+spi = Turtle(visible=False)
+spi.width(2)
+spi.color('lightsalmon')
+spi.speed(0)
+
+R = 130
+r = 90
+d = 110
+
+circNum = 23
+steps = 1200
+theta = np.linspace(0,circNum*2*np.pi,steps)
+
+for loop in range(1):
+   
+    off_x = randint(-220,220)
+    off_y = randint(-220,220)
+
+    spi.up()
+    x = off_x + (R-r)*np.cos(theta[0]) + d*np.cos(((R-r)/r)*theta[0])
+    y = off_y + (R-r)*np.sin(theta[0]) - d*np.sin(((R-r)/r)*theta[0])
+    spi.goto(x,y)
+    spi.down()
+    
+    for t in range(len(theta)):
+        I = 0
+        x = off_x + (R-r)*np.cos(theta[t]) + d*np.cos(((R-r)/r)*theta[t])
+        y = off_y + (R-r)*np.sin(theta[t]) - d*np.sin(((R-r)/r)*theta[t])
+        spi.goto(x,y)
+
+from turtle import *
+from random import *
+import numpy as np
+
+winnn = Screen()
+winnn.bgcolor('goldenrod')
+
+spi = Turtle(visible=False)
+spi.width(5)
+spi.color('lightslategray')
+spi.speed(0)
+
+R = 110
+r = 50
+d = 130
+
+circNum = 23
+steps = 1200
+theta = np.linspace(0,circNum*2*np.pi,steps)
+
+for loop in range(1):
+   
+    off_x = randint(-180,180)
+    off_y = randint(-180,180)
+
+    spi.up()
+    x = off_x + (R-r)*np.cos(theta[0]) + d*np.cos(((R-r)/r)*theta[0])
+    y = off_y + (R-r)*np.sin(theta[0]) - d*np.sin(((R-r)/r)*theta[0])
+    spi.goto(x,y)
+    spi.down()
+    
+    for t in range(len(theta)):
+        I = 0
+        x = off_x + (R-r)*np.cos(theta[t]) + d*np.cos(((R-r)/r)*theta[t])
+        y = off_y + (R-r)*np.sin(theta[t]) - d*np.sin(((R-r)/r)*theta[t])
+        spi.goto(x,y)
+        
+from turtle import *
+from random import *
+import numpy as np
+
+winnn = Screen()
+winnn.bgcolor('goldenrod')
+
+spi = Turtle(visible=False)
+spi.width(4)
+spi.color('olive')
+spi.speed(0)
+
+R = 83
+r = 240
+d = 130
+
+circNum = 23
+steps = 1200
+theta = np.linspace(0,circNum*2*np.pi,steps)
+
+for loop in range(1):
+   
+    off_x = randint(-200,200)
+    off_y = randint(-200,200)
+
+    spi.up()
+    x = off_x + (R-r)*np.cos(theta[0]) + d*np.cos(((R-r)/r)*theta[0])
+    y = off_y + (R-r)*np.sin(theta[0]) + d*np.sin(((R-r)/r)*theta[0])
+    spi.goto(x,y)
+    spi.down()
+    
+    for t in range(len(theta)):
+        I = 0
+        x = off_x + (R-r)*np.cos(theta[t]) + d*np.cos(((R-r)/r)*theta[t])
+        y = off_y + (R-r)*np.sin(theta[t]) + d*np.sin(((R-r)/r)*theta[t])
+        spi.goto(x,y)
